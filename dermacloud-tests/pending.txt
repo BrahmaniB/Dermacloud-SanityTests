@@ -1,0 +1,134 @@
+COMPLETED
+─────────────────────────────────────────────────────────────────────────────
+
+[x] Logout — 5 tests (logout.spec.ts)
+    - Navigate to profile page from dashboard header
+    - Click logout button → redirected to /login
+    - Verify protected route /clinic/dashboard redirects to /login after logout
+    - Verify protected route /clinic/settings/frontdesk redirects to /login after logout
+    - Verify protected route /clinic/settings/forms redirects to /login after logout
+
+[x] Form Settings — Dermatology — 7 tests (forms.spec.ts)
+    - Navigate to Form Settings via dashboard → profile → forms link
+    - Section toggle: disable "Clinical Examination", save, re-enable, save
+    - Field toggle: disable "Duration" field, save, re-enable, save
+    - Required/Optional toggle: "Previous Treatment" from Optional → Required and back
+    - Required pill disabled when its field is disabled ("Lesion Site")
+    - Add custom field ("Skin Texture Test") to Clinical Examination, save, delete, save
+    - Empty label validation: submitting blank label shows "Field label is required."
+
+[x] Form Settings — Cosmetology — 7 tests (cosmetology-forms.spec.ts)
+    - Navigate to Form Settings, switch to Cosmetology tab (border-purple-500 appears)
+    - Section toggle: disable "Assessment & Analysis", save, re-enable, save
+    - Field toggle: disable "Assessment/Diagnosis", save, re-enable, save
+    - Required/Optional toggle: "Clinical Findings" from Optional → Required and back
+    - Required pill disabled when its field is disabled ("Baseline Evaluation")
+    - Add custom field ("Cosmo Texture Test") to Assessment & Analysis, save, delete, save
+    - Empty label validation: submitting blank label shows "Field label is required."
+
+─────────────────────────────────────────────────────────────────────────────
+REMAINING
+─────────────────────────────────────────────────────────────────────────────
+
+[ ] Write login success test using real credentials from .env file (TEST_EMAIL, TEST_PASSWORD)
+    and assert redirect to /clinic/dashboard after successful login
+
+[ ] Write page object and tests for the password requirement checks on signup page
+    (8+ chars, Uppercase, Lowercase, Number, Special char)
+    — each check should turn green (teal) when that condition is met
+
+[x] Frontdesk — Edit staff (frontdesk-edit.spec.ts)
+    Click Edit button on a staff card, verify modal opens pre-filled with staff name and phone,
+    change name/phone, save, verify "Staff updated successfully!" toast appears
+
+[ ] Frontdesk — Deactivate staff
+    Click Deactivate button, verify toast "{name} deactivated" appears,
+    verify status badge changes from "Active" to "Inactive",
+    verify button title changes from "Deactivate" to "Activate"
+
+[ ] Frontdesk — Activate staff
+    After deactivating, click Activate button, verify toast "{name} activated" appears,
+    verify status badge goes back to "Active"
+
+[ ] Frontdesk — Close modal without saving
+    Click X button — verify modal closes and staff count stays the same
+    Click Cancel button — verify modal closes and staff count stays the same
+
+[ ] Frontdesk — Form validation
+    Submit empty form — verify required fields block submission
+    Enter password under 6 characters — verify browser/form blocks submission
+
+─────────────────────────────────────────────────────────────────────────────
+Form Settings — Uncovered scenarios (both Dermatology and Cosmetology)
+─────────────────────────────────────────────────────────────────────────────
+
+[ ] Bottom Save button states
+    Verify "No Changes" text when nothing is pending
+    Verify it switches to "Save Changes" when a toggle/pill is changed
+    (only the header save button was used in all existing tests)
+
+[ ] Cancel out of Add Custom Field modal
+    Open modal → click X button or press Escape
+    Verify modal closes and no field was added to the section
+
+[ ] Cancel out of Delete confirm modal
+    Click trash icon on a field → click Cancel in the confirm dialog
+    Verify the field still exists in the section
+
+[ ] Custom field with textarea type
+    Add a custom field selecting "textarea" from the type dropdown instead of "text"
+    Verify it saves and appears correctly in the section
+
+[ ] Switch back: Cosmetology → Dermatology
+    After switching to Cosmetology, click the Dermatology card
+    Verify teal border (border-teal-500) returns on Dermatology
+    Verify Cosmetology loses its purple border
+    Verify Dermatology sections reload correctly
+
+[ ] Batch save — toggle multiple fields before one save
+    Toggle 2–3 sections or fields without saving between them
+    Click Save once — verify all changes persist to the DB
+
+─────────────────────────────────────────────────────────────────────────────
+Form Settings — Dermatology only
+─────────────────────────────────────────────────────────────────────────────
+
+[ ] Section toggle on remaining Dermatology sections
+    Only "Clinical Examination" was toggled — test the same Active ↔ Hidden
+    cycle on every other Dermatology section (Chief Complaint, etc.)
+
+[ ] Field toggle / Required pill on fields outside Clinical Examination
+    Only Duration, Previous Treatment, Lesion Site were tested
+    Test the same scenarios on fields in other Dermatology sections
+
+[ ] Add Custom Field to sections other than Clinical Examination
+    The "Add Custom Field" button in Patient Information and other
+    Dermatology sections was never clicked
+
+─────────────────────────────────────────────────────────────────────────────
+Form Settings — Cosmetology only
+─────────────────────────────────────────────────────────────────────────────
+
+[ ] Patient Information fields
+    Skin Type (Fitzpatrick) — field toggle and Required/Optional never tested
+    Primary Concern — starts as Required, toggling to Optional and back never tested
+
+[ ] Procedure Details section
+    Section toggle (Active ↔ Hidden) never tested
+    None of its 6 fields tested:
+      Procedure Name, Treatment Goals, Session Number,
+      Package/Plan, Products & Parameters, Immediate Outcome
+
+[ ] Aftercare & Follow-up section
+    Section toggle never tested
+    None of its 5 fields tested:
+      Prescription (Rx), Aftercare Instructions, Home Products Recommended,
+      Follow-up Date, Expected Results Timeline
+
+[ ] Consent & Risks section
+    Section toggle never tested
+    Risks Explained and Consent Confirmed fields never tested
+
+[ ] Add Custom Field to other Cosmetology sections
+    Only "Assessment & Analysis" was used for custom field add/delete
+    Procedure Details, Aftercare & Follow-up, Consent & Risks never used

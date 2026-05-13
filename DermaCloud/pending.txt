@@ -1,0 +1,20 @@
+Need to do demo video
+Need to update hero section of home page
+Need to update footer of home page
+Need to do security part of things
+Need to work on frontdesk pharmacy page for both auto filling from report and also manual one
+Need to work on analysis page also
+Come back and work on dashboard of doctor page
+Work on AI summary of patient
+Work on forgot password in login page
+Patient AI report summary is a mess.
+--- E2E TESTS STATUS (updated 2026-04-28) ---
+[DONE] Login workflow (frontdesk-portal-login.spec.ts)
+[DONE] Full booking workflow: Login → Dashboard → Add Patient → Book Appointment
+       File: e2e/tests/frontdesk-book-appointment.spec.ts
+
+[PENDING E2E TESTS]
+- Dashboard: nav tabs visible, stats cards, today's schedule
+- Patients: search functionality, edit patient drawer
+- Appointments: status updates (check-in, complete, cancel), date navigation
+- Setup: add FRONTDESK_EMAIL and FRONTDESK_PASSWORD env vars to .env.local for test creds
